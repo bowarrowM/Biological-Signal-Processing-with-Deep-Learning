@@ -1,0 +1,47 @@
+data:
+  # Leave empty and set via CLI flags or environment variables.
+  # Add more dataset paths here as new datasets are integrated.
+  ravdess_path: "data/raw/ravdess"
+  crema_path: "data/raw/crema/AudioWAV"
+  tess_path: "data/raw/tess/TESS Toronto emotional speech set data"
+  savee_path: "data/raw/savee/ALL"
+
+audio:
+  sample_rate: 22050
+  segment_duration: 2   # seconds
+  max_len: 100          # timesteps after padding/truncation
+  n_mfcc: 40
+  n_mels: 40
+
+augmentation:
+  # Classes that receive targeted augmentation during data loading.
+  # Supported strategies: pitch_up, pitch_down, time_stretch_slow,
+  #                       time_stretch_fast, background_noise
+  weak_classes:
+    surprise:  pitch_up
+    fear:      pitch_down
+    happy:     pitch_up
+    disgust:   time_stretch_fast
+    sad:       time_stretch_slow
+
+model:
+  checkpoint_path: "checkpoints/best_model.keras"
+  label_encoder_path: "checkpoints/label_encoder.pkl"
+  scaler_path: "checkpoints/scaler.pkl"
+  l2_reg: 0.0001
+  dropout_rate: 0.3
+  attention_heads: 4
+  attention_key_dim: 32
+
+training:
+  test_size: 0.2
+  val_size: 0.1         # fraction of training set held out as validation
+  random_seed: 42
+  learning_rate: 0.0003
+  batch_size: 32
+  epochs: 100
+  label_smoothing: 0.1
+  early_stop_patience: 12
+  reduce_lr_patience: 5
+  reduce_lr_factor: 0.5
+  min_lr: 0.000001

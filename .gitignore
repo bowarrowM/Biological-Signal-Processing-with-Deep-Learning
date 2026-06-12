@@ -1,0 +1,25 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Model artifacts (too large for git)
+checkpoints/
+*.keras
+*.pkl
+
+# Datasets (downloaded via download.py)
+data/
+
+# Gradio
+gradio_cached_examples/
+*.log
+flagged/
+
+# Claude Code
+.claude/
+memory/
+
+# Misc
+.DS_Store
